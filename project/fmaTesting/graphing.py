@@ -1,11 +1,13 @@
-# plotting.py
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.metrics import silhouette_samples, silhouette_score
 from sklearn.neighbors import NearestNeighbors
 from scipy.cluster.hierarchy import dendrogram, linkage
+from sklearn.mixture import GaussianMixture
+from sklearn.cluster import KMeans
 
+#DEBUGGING for HDBSCAN errors
 try:
     import hdbscan
     HDBSCAN_AVAILABLE = True
@@ -63,7 +65,6 @@ def plot_silhouette(X, labels, title="Silhouette Plot"):
 
 #elbow graph for KMEANS
 def plot_elbow_kmeans(X, k_range=range(2, 15)):
-    from sklearn.cluster import KMeans
     inertias = []
 
     for k in k_range:
@@ -82,7 +83,6 @@ def plot_elbow_kmeans(X, k_range=range(2, 15)):
 
 #calculates the silhouette score on a range of clusters (KMEANS)
 def plot_silhouette_vs_k(X, k_range=range(2, 15)):
-    from sklearn.cluster import KMeans
     sils = []
 
     #iterate through each cluster
@@ -101,7 +101,6 @@ def plot_silhouette_vs_k(X, k_range=range(2, 15)):
 
 #display function for GMM
 def plot_gmm_aic_bic(X, k_range=range(2, 15)):
-    from sklearn.mixture import GaussianMixture
     aics, bics = [], []
 
     for k in k_range:
@@ -131,7 +130,8 @@ def plot_dendrogram(X, sample_size=300, method="ward"):
     #display
     plt.figure(figsize=(12, 5))
     dendrogram(Z, no_labels=True)
-    plt.title("Agglomerative Clustering Dendrogram")
+    plt.title("Clustering Dendrogram")
+    plt.xticks(rotation=45, ha='right', fontsize=8)
     plt.xlabel("Samples")
     plt.ylabel("Distance")
     plt.show()
@@ -163,25 +163,4 @@ def plot_hdbscan_tree(clusterer):
     clusterer.condensed_tree_.plot(select_clusters=True,
                                    label_clusters=True)
     plt.title("HDBSCAN Condensed Cluster Tree")
-    plt.show()
-
-#display function for spectral graphs
-def plot_eigengap_spectral(X, k=15, n_neighbors=20):
-    """Plot eigenvalues of Laplacian to visualize eigengap."""
-    from sklearn.neighbors import kneighbors_graph
-    from sklearn.manifold import spectral_embedding
-
-    W = kneighbors_graph(X, n_neighbors=n_neighbors,
-                         include_self=True).toarray()
-
-    # calcualte eigenvalues
-    embedding = spectral_embedding(W, n_components=k)
-    eigvals = np.sort(np.linalg.eigvals(W))
-
-    plt.figure(figsize=(8, 6))
-    plt.plot(eigvals[:50], marker='o')
-    plt.title("Spectral Clustering Eigenvalues (Eigengap)")
-    plt.xlabel("Index")
-    plt.ylabel("Eigenvalue")
-    plt.grid(True)
     plt.show()
