@@ -11,13 +11,20 @@ from sklearn.mixture import GaussianMixture
 from sklearn.metrics import silhouette_score
 
 
+from graphing import (
+    plot_pca_scatter,
+    plot_silhouette,
+    plot_dendrogram,
+    plot_dbscan_k_distance,
+    plot_hdbscan_tree
+)
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', 200)   # safer than None
 pd.set_option('display.max_colwidth', None)
 
 #tracks = utils.load('fma_metadata/tracks.csv')
-echonest = utils.load('fma_metadata/echonest.csv')
+echonest = utils.load('fma_metadata/fma_metadata/echonest.csv')
 #features = utils.load('fma_metadata/features.csv')
 
 #collapsing colums from a hierarchical structure into a single flat list
@@ -92,6 +99,12 @@ X_final_hybrid = umap_reducer.fit_transform(X_hybrid)
 
 # Sweet! Now we have a 20-dimensional set of clean and descriptive data!
 
+#======================== Visualizations =======================================
+
+#===============================================================================
+
+
+
 # Testing out the clustering algorithms now
 
 
@@ -103,11 +116,14 @@ except ImportError:
     print("⚠️ HDBSCAN not installed; skipping HDBSCAN tests.")
 
 
+# ---------------------------------------------
+# Helpers
+# ---------------------------------------------
+
 def safe_silhouette(X, labels):
-    """Compute silhouette score safely."""
-    # labels must have at least 2 clusters
+    """Compute silhouette score only if valid."""
     if len(set(labels)) < 2:
-        return float("nan")  # cannot compute silhouette
+        return float("nan")
     return silhouette_score(X, labels)
 
 
@@ -115,13 +131,15 @@ def timed(func):
     """Decorator to measure runtime of clustering tests."""
     def wrapper(*args, **kwargs):
         start = time.time()
-        labels = func(*args, **kwargs)
+        result = func(*args, **kwargs)   # now returns (model, labels)
         end = time.time()
-        return labels, end - start
+        return result, end - start
     return wrapper
 
 
-# -------------------- CLUSTERING METHODS --------------------
+# ---------------------------------------------
+# CLUSTERING FUNCTIONS — return (model, labels)
+# ---------------------------------------------
 
 @timed
 def test_kmeans(X, k=10):
@@ -129,7 +147,16 @@ def test_kmeans(X, k=10):
     labels = km.fit_predict(X)
     sil = safe_silhouette(X, labels)
     print(f"KMeans (k={k}): silhouette={sil:.4f}")
-    return labels
+    return km, labels
+
+
+@timed
+def test_kmeans_plus(X, k=10):
+    km = KMeans(n_clusters=k, init="k-means++", n_init=10, random_state=42)
+    labels = km.fit_predict(X)
+    sil = safe_silhouette(X, labels)
+    print(f"KMeans++ (k={k}): silhouette={sil:.4f}")
+    return km, labels
 
 
 @timed
@@ -138,7 +165,7 @@ def test_birch(X, k=10):
     labels = birch.fit_predict(X)
     sil = safe_silhouette(X, labels)
     print(f"Birch (k={k}): silhouette={sil:.4f}")
-    return labels
+    return birch, labels
 
 
 @timed
@@ -147,7 +174,7 @@ def test_gmm(X, k=10):
     labels = gmm.fit_predict(X)
     sil = safe_silhouette(X, labels)
     print(f"GMM (k={k}): silhouette={sil:.4f}")
-    return labels
+    return gmm, labels
 
 
 @timed
@@ -156,7 +183,7 @@ def test_agglomerative(X, k=10):
     labels = agg.fit_predict(X)
     sil = safe_silhouette(X, labels)
     print(f"Agglomerative (k={k}): silhouette={sil:.4f}")
-    return labels
+    return agg, labels
 
 
 @timed
@@ -165,110 +192,89 @@ def test_dbscan(X, eps=0.5, min_samples=5):
     labels = db.fit_predict(X)
     sil = safe_silhouette(X, labels)
     print(f"DBSCAN (eps={eps}, min_samples={min_samples}): silhouette={sil}")
-    return labels
+    return db, labels
 
 
 @timed
 def test_hdbscan(X, min_cluster_size=15):
     if not HDBSCAN_AVAILABLE:
-        print("HDBSCAN not available.")
-        return np.zeros(len(X)), 0  # dummy result
+        print("HDBSCAN not installed.")
+        return None, np.zeros(len(X))
+
     clusterer = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size)
     labels = clusterer.fit_predict(X)
     sil = safe_silhouette(X, labels)
     print(f"HDBSCAN (min_cluster_size={min_cluster_size}): silhouette={sil}")
-    return labels
+    return clusterer, labels
 
-def test_spectral(X, k=10):
 
-    try:
-        spectral = SpectralClustering(
-            n_clusters=k,
-            affinity='nearest_neighbors',  # MUCH better than RBF for high-dimensional audio
-            n_neighbors=20,                # tweakable
-            assign_labels='kmeans',        # stable default
-            random_state=42
-        )
+# ---------------------------------------------
+# MAIN TEST SUITE — RUNS ALL + VISUALIZES
+# ---------------------------------------------
 
-        labels = spectral.fit_predict(X)
-
-        # Compute silhouette only if meaningful
-        unique_labels = set(labels)
-        if len(unique_labels) > 1:
-            sil = silhouette_score(X, labels)
-            print(f"Spectral (k={k}): silhouette={sil:.4f}")
-        else:
-            sil = float("nan")
-            print("Spectral: silhouette=N/A (only one cluster produced).")
-
-        return labels, sil
-
-    except Exception as e:
-        print("Spectral clustering failed:", e)
-        return None, None
-    
-def test_kmeans_plus(X, k=10):
-    km = KMeans(
-        n_clusters=k,
-        init="k-means++",  # explicitly use k-means++
-        n_init=10,         # consistent with sklearn defaults
-        random_state=42
-    )
-    labels = km.fit_predict(X)
-    sil = silhouette_score(X, labels)
-    print(f"KMeans++ (k={k}): silhouette={sil:.4f}")
-    return labels, sil
-
-# -------------------- RUN ALL TESTS --------------------
-
-def run_all_tests(X, k=10):
+def run_all_tests(X, k=10, title_prefix=""):
     print("\n=== Running Clustering Benchmarks ===\n")
 
-    results = []
+    metrics = []
+    results = {}     # store (model, labels)
 
     tests = [
         ("KMeans", test_kmeans, {"k": k}),
         ("KMeans++", test_kmeans_plus, {"k": k}),
         ("Birch", test_birch, {"k": k}),
         ("GMM", test_gmm, {"k": k}),
-        #("Spectral Clustering", test_spectral, {"k": k}),
         ("Agglomerative", test_agglomerative, {"k": k}),
-        ("DBSCAN", test_dbscan, {"eps": 0.7, "min_samples": 5}),
-        
+        ("DBSCAN", test_dbscan, {"eps": 0.7, "min_samples": 5})
     ]
 
     if HDBSCAN_AVAILABLE:
         tests.append(("HDBSCAN", test_hdbscan, {"min_cluster_size": 15}))
 
+    # -------- RUN CLUSTERERS --------
     for name, func, params in tests:
         print(f"\n--- {name} ---")
-        labels, runtime = func(X, **params)
+
+        (model, labels), runtime = func(X, **params)
         sil = safe_silhouette(X, labels)
-        results.append({
+
+        # store
+        results[name] = {"model": model, "labels": labels}
+
+        metrics.append({
             "algorithm": name,
             "silhouette": sil,
             "runtime_sec": runtime
         })
 
+        # -------- VISUALIZATION PER ALGORITHM --------
+        print(f"Plotting {name} visuals...")
+
+        # PCA scatter for most algorithms
+        if name not in ("DBSCAN", "HDBSCAN"):
+            plot_pca_scatter(X, labels, f"{title_prefix} {name} PCA Scatter")
+
+        # Silhouette for all clusterers that produce ≥2 clusters
+        plot_silhouette(X, labels, f"{title_prefix} {name} Silhouette")
+
+        # Algorithm-specific visuals
+        if name == "Agglomerative":
+            plot_dendrogram(X)
+
+        elif name == "DBSCAN":
+            plot_dbscan_k_distance(X, k=5)
+
+        elif name == "HDBSCAN":
+            plot_hdbscan_tree(model)
+
     print("\n=== Benchmarking Complete ===\n")
-    return results
+    return results, metrics
 
-print()
-print()
-print("-----------------Test 1: Using PCA for Dimensionality Reduction-----------------")
-run_all_tests(X_final_pca, k=20)
-print("-----------------End Test 1-----------------")
-print()
-print()
 
-print("-----------------Test 2: Using UMAP for Dimensionality Reduction-----------------")
-run_all_tests(X_final_umap, k=20)
-print("-----------------End Test 2-----------------")
-print()
-print()
+print("----------------- PCA TEST -----------------")
+pca_results, pca_metrics = run_all_tests(X_final_pca, k=20, title_prefix="PCA")
 
-print("-----------------Test 3: Using PCA AND UMAP for Dimensionality Reduction-----------------")
-run_all_tests(X_final_hybrid, k=20)
-print("-----------------End Test 3-----------------")
-print()
-print()
+print("----------------- UMAP TEST -----------------")
+umap_results, umap_metrics = run_all_tests(X_final_umap, k=20, title_prefix="UMAP")
+
+print("----------------- HYBRID TEST -----------------")
+hybrid_results, hybrid_metrics = run_all_tests(X_final_hybrid, k=20, title_prefix="Hybrid")
