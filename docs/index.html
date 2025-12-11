@@ -18,7 +18,7 @@
             <p>
                 The goal of this project was to identify the clustering algorithms that would best work with 
                 musical data and could be used in a music recommendation application. We systematically tested various algorithms
-                with different types of dimensional reducuction methods against the FMA metadata set and evaluated their silhouette scores.
+                with different types of dimensional reduction methods against the FMA metadata set and evaluated their silhouette scores.
             </p>
         </div>
 
@@ -31,7 +31,7 @@
                 the evolution of the timbre throughout the track.
             </p>
             <p>
-                Due to the high quantitiy of dimensions in this dataset, it is necessary to apply Dimensional Reduction techniques to
+                Due to the high quantity of dimensions in this dataset, it is necessary to apply Dimensional Reduction techniques to
                 bring the bring that number down to a more manageable quantity. In this project we used the PCA and UMAP dimensional Reduction
                 techniques and observed their effect on various clustering algorithms.
             </p>
@@ -55,7 +55,7 @@
             <p>
                 For each DR method used KMeans scored consistently higher than
                 the alternative methods on the same data. Below is the
-                scatterplots, elbow charts and Silhouette score graphs we used
+                scatter plots, elbow charts and Silhouette score graphs we used
                 to formulate our results. 
             </p>
 
@@ -67,11 +67,11 @@
             </div>
             <p><strong>From left to right:</strong></p>
             <p>
-                A scatterplot is included to show clusters made by KMeans under a PCA
+                A scatter plot is included to show clusters made by KMeans under a PCA
                 dimensional reduction algorithm. An Elbow plot is also included to demonstrate
-                how many clusters we calcualted to be optimal. Finally, a Silhouette score graph
+                how many clusters we calculated to be optimal. Finally, a Silhouette score graph
                 is included to show how we calculated the silhouette scores given to the KMeans test
-                we ran.
+                we ran. This test had a score of <b>.039</b>
             </p>
 
             <p><strong>UMAP Graphics:</strong></p>
@@ -83,11 +83,12 @@
 
             <p><strong>From left to right:</strong></p>
             <p>
-                A scatterplot is included to show clusters made by KMeans under a UMAP
+                A scatter plot is included to show clusters made by KMeans under a UMAP
                 dimensional reduction algorithm. An Elbow plot is also included to demonstrate
-                how many clusters we calcualted to be optimal. Finally, a Silhouette score graph
+                how many clusters we calculated to be optimal. Finally, a Silhouette score graph
                 is included to show how we calculated the silhouette scores given to the KMeans test
-                we ran.
+                we ran. This test had a score of <b>.279</b>. This is a significant improvement to that of the PCA 
+                approach!
             </p>
 
             <p><strong>Hybrid Graphics:</strong></p>
@@ -99,11 +100,11 @@
 
             <p><strong>From left to right:</strong></p>
             <p>
-                A scatterplot is included to show clusters made by KMeans under a hybrid
+                A scatter plot is included to show clusters made by KMeans under a hybrid
                 dimensional reduction algorithm. An Elbow plot is also included to demonstrate
-                how many clusters we calcualted to be optimal. Finally, a Silhouette score graph
+                how many clusters we calculated to be optimal. Finally, a Silhouette score graph
                 is included to show how we calculated the silhouette scores given to the KMeans test
-                we ran.
+                we ran. This test had a score of <b>.279</b>
             </p>
 
         </div>
@@ -136,10 +137,10 @@
 
             <p><strong>From left to right:</strong></p>
             <p>
-                A scatterplot is included to show clusters made by KMeans++ under a PCA
+                A scatter plot is included to show clusters made by KMeans++ under a PCA
                 dimensional reduction algorithm. Additionally, a Silhouette score graph
                 is included to show how we calculated the silhouette scores given to the KMeans++ test
-                we ran.
+                we ran. This test had a score of <b>.04</b>
             </p>
 
             <p><strong>UMAP Graphics:</strong></p>
@@ -150,10 +151,10 @@
 
             <p><strong>From left to right:</strong></p>
             <p>
-                A scatterplot is included to show clusters made by KMeans++ under a UMAP
+                A scatter plot is included to show clusters made by KMeans++ under a UMAP
                 dimensional reduction algorithm. Additionally, a Silhouette score graph
                 is included to show how we calculated the silhouette scores given to the KMeans++ test
-                we ran.
+                we ran. This test had a score of <b>.279</b>
             </p>
 
             <p><strong>Hybrid Graphics:</strong></p>
@@ -164,10 +165,10 @@
 
             <p><strong>From left to right:</strong></p>
             <p>
-                A scatterplot is included to show clusters made by KMeans++ under a Hybrid
+                A scatter plot is included to show clusters made by KMeans++ under a Hybrid
                 dimensional reduction algorithm. Additionally, a Silhouette score graph
                 is included to show how we calculated the silhouette scores given to the KMeans++ test
-                we ran.
+                we ran. This test had a score of <b>.279</b>
             </p>
         </div>
 
@@ -186,7 +187,7 @@
                 tests we did using different dimensional reduction tools. This is due to the high density of
                 points within the given data. Birch's approach of using data summaries can be good for low density
                 data points, but in the context of the FMA dataset, the clusters were not able to become clearly
-                defined from eachother with this method.
+                defined from each other with this method.
             </p>
 
             <p><strong>PCA Graphics:</strong></p>
@@ -198,10 +199,11 @@
 
             <p><strong>From left to right:</strong></p>
             <p>
-                A scatterplot is included to show clusters made by the Birch algorithm under a PCA
+                A scatter plot is included to show clusters made by the Birch algorithm under a PCA
                 dimensional reduction algorithm. Additionally, a Silhouette score graph
                 is included to show how we calculated the silhouette scores given to the Birch test
-                we ran. Finally a dendrogram is included in our display to demonstrate the hierarchical
+                we ran. This test had a score of <b>.002</b>, the lowest score so far.
+                Finally a dendrogram is included in our display to demonstrate the hierarchical
                 clusters made by Birch. Note: Leaf nodes are kept unlabeled as there are too many data
                 points to maintain readability with full labeling.
             </p>
@@ -215,12 +217,12 @@
 
             <p><strong>From left to right:</strong></p>
             <p>
-                A scatterplot is included to show clusters made by the Birch algorithm under a UMAP
+                A scatter plot is included to show clusters made by the Birch algorithm under a UMAP
                 dimensional reduction algorithm. Additionally, a Silhouette score graph
                 is included to show how we calculated the silhouette scores given to the Birch test
-                we ran. Finally a dendrogram is included in our display to demonstrate the hierarchical
-                clusters made by Birch. Note: Leaf nodes are kept unlabeled as there are too many data
-                points to maintain readability with full labeling.
+                we ran. This test had a score of <b>.184</b> Finally a dendrogram is included in our 
+                display to demonstrate the hierarchical clusters made by Birch. Note: Leaf nodes are kept 
+                unlabeled as there are too many data points to maintain readability with full labeling.
             </p>
 
             <p><strong>Hybrid Graphics:</strong></p>
@@ -232,12 +234,12 @@
 
             <p><strong>From left to right:</strong></p>
             <p>
-                A scatterplot is included to show clusters made by the Birch algorithm under a Hybrid
+                A scatter plot is included to show clusters made by the Birch algorithm under a Hybrid
                 dimensional reduction algorithm. Additionally, a Silhouette score graph
                 is included to show how we calculated the silhouette scores given to the Birch test
-                we ran. Finally a dendrogram is included in our display to demonstrate the hierarchical
-                clusters made by Birch. Note: Leaf nodes are kept unlabeled as there are too many data
-                points to maintain readability with full labeling.
+                we ran. This test had a score of <b>.1899</b>. Finally a dendrogram is included in our display 
+                to demonstrate the hierarchical clusters made by Birch. Note: Leaf nodes are kept unlabeled as 
+                there are too many data points to maintain readability with full labeling.
             </p>
         </div>
 
@@ -253,8 +255,8 @@
             <p>
                 In our tests GMM scored fairly standard in its silhouette score. In fact, in the context of our results,
                 the scores produced by GMM were often the median result of the methods we tested. This is likely a consequence
-                of the data point desnity present within the FMA dataset. If all points are compacted towards eachother, it is
-                through a much slimer margin that clusters are determined and points are assigned as the weights dictating which
+                of the data point density present within the FMA dataset. If all points are compacted towards each other, it is
+                through a much similar margin that clusters are determined and points are assigned as the weights dictating which
                 points belong to which clusters are going to me very similar.
             </p>
 
@@ -267,10 +269,10 @@
 
             <p><strong>From left to right:</strong></p>
             <p>
-                A scatterplot is included to show clusters made by the GMM algorithm under a PCA
+                A scatter plot is included to show clusters made by the GMM algorithm under a PCA
                 dimensional reduction algorithm. Additionally, a Silhouette score graph
                 is included to show how we calculated the silhouette scores given to the GMM test
-                we ran. Finally a AIC vs. BIC chart is shown to demonstrate the optimum k-clusters to
+                we ran. This test had a score of <b>-.019</b> Finally a AIC vs. BIC chart is shown to demonstrate the optimum k-clusters to
                 use for our given dataset.
             </p>
 
@@ -283,10 +285,10 @@
 
             <p><strong>From left to right:</strong></p>
             <p>
-                A scatterplot is included to show clusters made by the GMM algorithm under a UMAP
+                A scatter plot is included to show clusters made by the GMM algorithm under a UMAP
                 dimensional reduction algorithm. Additionally, a Silhouette score graph
                 is included to show how we calculated the silhouette scores given to the GMM test
-                we ran. Finally a AIC vs. BIC chart is shown to demonstrate the optimum k-clusters to
+                we ran. This test had a score of <b>.169</b> Finally a AIC vs. BIC chart is shown to demonstrate the optimum k-clusters to
                 use for our given dataset.
             </p>
 
@@ -299,10 +301,10 @@
 
             <p><strong>From left to right:</strong></p>
             <p>
-                A scatterplot is included to show clusters made by the GMM algorithm under a Hybrid
+                A scatter plot is included to show clusters made by the GMM algorithm under a Hybrid
                 dimensional reduction algorithm. Additionally, a Silhouette score graph
                 is included to show how we calculated the silhouette scores given to the GMM test
-                we ran. Finally a AIC vs. BIC chart is shown to demonstrate the optimum k-clusters to
+                we ran. This test had a score of <b>.169</b> Finally a AIC vs. BIC chart is shown to demonstrate the optimum k-clusters to
                 use for our given dataset.
             </p>
         </div>
@@ -310,18 +312,19 @@
         <div class="card">
             <h2>Agglomerative Clustering:</h2>
             <p>
-                Agglomerative clustering isn a bottom-up approach to clustering,
-                focusing on creating a higherarchy through a defined linkage type. For this
+                Agglomerative clustering is a bottom-up approach to clustering,
+                focusing on creating a hierarchy through a defined linkage type. For this
                 project we opted for the standard "ward" linkage type as it was the default 
-                choice and was optimal for limiting variance between datapoints. Once each cluster
-                is defined a hierarchy is then made which can be seen in our dendrogram below.
+                choice and was optimal for limiting variance between data points. Once each cluster
+                is defined, a hierarchy is then made which can be seen in our dendrogram below.
             </p>  
             <p>
-                Agglomerative clustering produced standard results for our testing, though it did
-                produce a very low silhouette score in the PCA dimensional reduction test. While in general,
-                the score produced by the agglomerative tests were standard we believe the low PCA score is 
-                a consequence of the continuous topology of the FMA dataset, limiting the difference between data points
-                and thus complicating the higherarchy forming process.
+                Agglomerative clustering produced sub-standard results for our testing, While in general, 
+                the score produced by the agglomerative tests were standard we believe the low S-score is 
+                a consequence of the effect of high dimensionality of the dataset we were working with. 
+                The higher the dimensionality of the data, the more the distances begin to "compress" in 
+                the sense that distances become nearly equal. Seeing as Agglomerative clustering relies 
+                heavily on pairwise distances, this effect causes points to be clustered arbitrarily. 
             </p>
 
             <p><strong>PCA Graphics:</strong></p>
@@ -331,6 +334,15 @@
                 <img src="Images/PCA_Images/Agglo_Dendrogram.png" alt="Dendrogram for PCA">
             </div>
 
+            <p><strong>From left to right:</strong></p>
+            <p>
+                We see the noticeable effect of high dimensional data on algorithms that depend heavily on pairwise distance metrics.
+                Starting with the scatter plot on the left we can see the instability of the clusters by how "fuzzy" they look 
+                rather than having distinct borders. The S-scores chart also corroborates this difficulty as the average score was a
+                mere <b>.001</b>. The dendrogram reflects these uniform distances as the merges happened almost always on very similar looking
+                (height wise) clusters. 
+            </p>
+
             <p><strong>UMAP Graphics:</strong></p>
             <div class="image-area">
                 <img src="Images/UMAP_Images/Agglo_Scatterplot.png" alt="Scatterplot for UMAP">
@@ -338,12 +350,27 @@
                 <img src="Images/UMAP_Images/Agglo_Dendrogram.png" alt="Dendrogram for UMAP">
             </div>
 
+            <p><strong>From left to right:</strong></p>
+            <p>
+                The impact of UMAP is seen yet again in the scatter plot. There are now significantly more distinct cluster regions in 
+                the data. Similarly the Silhouette Graph looks significantly cleaner, having a more concrete score of <b>.204</b> and indicating that
+                more points are actually within clusters they belong to. The dendrogram on the right also demonstrates the much cleaner
+                and less noisy that the UMAP clustering provided. Here the clusters happen at lower heights indicating more stability.
+            </p>
+
             <p><strong>Hybrid Graphics:</strong></p>
             <div class="image-area">
                 <img src="Images/Hybrid_Images/Agglo_Scatterplot.png" alt="Scatterplot for Hybrid">
                 <img src="Images/Hybrid_Images/Agglo_S_Scores.png" alt="Score chart for Hybrid">
                 <img src="Images/Hybrid_Images/Agglo_Dendrogram.png" alt="Dendrogram for Hybrid">
             </div>
+
+            <p><strong>From left to right:</strong></p>
+            <p>
+                Scatter plot results for the hybrid approach were actually very similar, almost identical, to that of the UMAP approach.
+                Clusters were, again, clearly visible and much less noisy than the PCA approach. The silhouette graph shows the exact same 
+                score as the UMAP approach: <b>.204</b>. The dendrogram again shows stability as well.
+            </p>
         </div>
 
         <div class="card">
@@ -356,14 +383,13 @@
                 that minimum threshold is met.
             </p>
             <p>
-                For this project we noticed distinct differences between DBSCAN
-                and the alternative clustering algorithms. DBSCAN produced only
-                one cluster in the PCA run of the dataset and therefore produced
-                no Silhouette score for that run. We believe that the difficulties
-                we experienced with DBSCAN are a consequence of the high density of
-                data points within the data set. DBSCAN is likely grabbing all points
-                near the chosen cluster center points as one cluster creating an
-                imposible cluster for this data.
+                It is here that we begin to observe the significant impacts of dimensional reduction and feature space
+                topology, particularly for density-based algorithms. We noticed distinct differences between DBSCAN
+                and the alternative clustering algorithms. DBSCAN produced only one cluster in the PCA run of the dataset 
+                and therefore produced no Silhouette score for that run. We believe this is a result of the data's smooth
+                and highly continuous density topology. Algorithms like these depend heavily on having distinct density regions
+                separated by clear areas of low density, so when working with the opposite type of topology it is very easy 
+                for these algorithms to identify only 1 or 2 big cluster in the data.
             </p>    
             <p>
                 DBSCAN was an outlier within our results, producing in irregular data
@@ -378,6 +404,16 @@
                 <img src="Images/PCA_Images/DBSCAN_k_dist.png" alt="K Distance for PCA">
             </div>
 
+            <p><strong>From left to right:</strong></p>
+            <p>
+                Scatter plot results for the PCA approach show how much DBSCAN struggled with the topology of our data;
+                identifying only one major cluster in all of the data. Due to this there is no corresponding S-score graph,
+                but the k-distance plot on the right also highlights just how much the high dimensionality of the data, combined
+                with the challenging topology and PCA dimensional reduction technique affects the algorithm. We can see that the 
+                distance between neighbors only increases when it is almost at the end of the dataset, consistent with a single large
+                cluster. 
+            </p>
+
             <p><strong>UMAP Graphics:</strong></p>
             <div class="image-area">
                 <img src="Images/UMAP_Images/DBSCAN_Scatterplot.png" alt="Scatterplot for UMAP">
@@ -385,12 +421,28 @@
                 <img src="Images/UMAP_Images/DBSCAN_k_dist.png" alt="K Distance for UMAP">
             </div>
 
+            <p><strong>From left to right:</strong></p>
+            <p>
+                UMAP again helped DBSCAN slightly, but not enough to reveal all clusters. As can be seen in the scatter plot, there are 
+                now two highlighted clusters. Interestingly, due to the difference in size and density of these two identified clusters
+                the S-Score was significantly skewed towards 1. This can be seen in the Silhouette graph; the bigger cluster is dragging
+                the S-Score higher than it actually should, clocking in at: <b>.358</b>. This score, along with the distance plot on the right, might be misleading
+                at first glance, as it might show inaccurately good-looking scores for an algorithm that actually performed sub-par. 
+            </p>
+
             <p><strong>Hybrid Graphics:</strong></p>
             <div class="image-area">
                 <img src="Images/Hybrid_Images/DBSCAN_Scatterplot.png" alt="Scatterplot for Hybrid">
                 <img src="Images/Hybrid_Images/DBSCAN_S_Scores.png" alt="Score chart for Hybrid">
                 <img src="Images/Hybrid_Images/DBSCAN_k_dist.png" alt="K Distance for Hybrid">
             </div>
+
+            <p><strong>From left to right:</strong></p>
+            <p>
+                Scatter plot results for the hybrid approach were again very similar to that of the UMAP approach.
+                The two clusters were, again, clearly visible, though they are still wrong. The silhouette graph shows a similar
+                score as the UMAP approach: <b>.332</b>. The distance plot again shows the same stability as the UMAP approach.
+            </p>
         </div>
 
         <div class="card">
@@ -399,21 +451,21 @@
                 HDBSCAN is a clustering method that works by searching for different densities of
                 data points on a graph. Once the densities have been determined clusters are defined by
                 the clear shift in densities between "chunks" of data points on a graph. These clusters are then
-                out into a hierarchical structure of a minimum spanning tree. An important requirement for HBDSCAN
+                put into a hierarchical structure of a minimum spanning tree. An important requirement for HBDSCAN
                 is that there must be a clear difference in point densities for a cluster to be identified, otherwise
                 it is likely that the data will not be processed properly.
             </p>
             <p>
-                For this project we determined HDBSCAN to be functioning as intended,
-                but we still consider it as outlier method within our results. HDBSCAN is 
-                a hierarchical clustering method and therefore requires a well defined topology
-                between points. The FMA dataset posseses a continuous topology which rendered 
-                HDBSCAN ineffective at clustering datapoints.
+                For this project we determined HDBSCAN to as similarly disadvantaged as DBSCAN, and therefore is considered
+                an outlier method within our results. HDBSCAN's dependency on well defined density regions causes it to struggle
+                in a similar way to DBSCAN in the sense that it identifies only 1 or 2 large clusters. We attribute this to the 
+                continuous topology of our FMA dataset. 
             </p>    
             <p>
                 HDBSCAN produced drastically high S-Score values, but only identified very few clusters.
                 This means that for the results of this method must be considered as outliers and abnormal.
-                The performace of HDBSCAN also serves as a piece of evidence that hierarchical algorithms are not
+                The performance of HDBSCAN also serves as a piece of evidence that the topology of the data we are working with is 
+                indeed a highly continuous manifold rather than distinct clusters. It also shows that hierarchical algorithms are not
                 well suited for categorizing music data as there are few trends that would result in a clearly
                 defined hierarchy that HDBSCAN would require for creating defined clusters.
             </p>
@@ -425,6 +477,14 @@
                 <img src="Images/PCA_Images/HDBSCAN_Cluster_Treee.png" alt="Cluster Tree for PCA">
             </div>
 
+            <p><strong>From left to right:</strong></p>
+            <p>
+                The scatter plot shows HDBSCAN picking up two clusters, even despite the use of PCA. These clusters were technically
+                more accurate than those produced by DBSCAN while using PCA, but still does not accurately represent our data. As 
+                can be seen in the Silhouette Score graph, these two clusters generated an S-Score of <b>.03</b>. The Condensed cluster 
+                tree accurately reflects how one cluster dominates and how these two clusters quickly become unstable as we go up in density.
+            </p>
+
             <p><strong>UMAP Graphics:</strong></p>
             <div class="image-area">
                 <img src="Images/UMAP_Images/HDBSCAN_Scatterplot.png" alt="Scatterplot for UMAP">
@@ -432,18 +492,33 @@
                 <img src="Images/UMAP_Images/HDBSCAN_Cluster_Tree.png" alt="Cluster Tree for UMAP">
             </div>
 
+            <p><strong>From left to right:</strong></p>
+            <p>
+                Scatter plot results for UMAP approach actually yielded results that were very similar to the scatter plot generate by 
+                DBSCAN. One big cluster and one small cluster off to the side. This structure again skewed the S-Score, as can be seen in the 
+                Silhouette graph, to produce a score of <b>.358</b>. The condensed cluster tree again shows instability as the density is increased,
+                though it is arguably more unstable than before.
+            </p>
+
             <p><strong>Hybrid Graphics:</strong></p>
             <div class="image-area">
                 <img src="Images/Hybrid_Images/HDBSCAN_Scatterplot.png" alt="Scatterplot for Hybrid">
                 <img src="Images/Hybrid_Images/HDBSCAN_S_Scores.png" alt="Score chart for Hybrid">
                 <img src="Images/Hybrid_Images/HDBSCAN_Cluster_Tree.png" alt="Cluster Tree for Hybrid">
             </div>
+
+            <p><strong>From left to right:</strong></p>
+            <p>
+                Scatter plot results for the hybrid approach were again very similar to that of the UMAP approach.
+                The two clusters were, again, clearly visible, though they are still wrong. The silhouette graph shows a similar score of: <b>.332</b>. 
+                The condensed cluster tree again shows the same instability as with the UMAP approach.
+            </p>
         </div>
 
         <div class="card">
             <h2>Results:</h2>
             <p>
-                To conclude, we determined that KMeans and KMeans++ are the most optimum clustering
+                We determined that KMeans and KMeans++ are the most optimum clustering
                 methods to use when working with music data under dimensional reduction. This is due to KMeans/KMeans++ ability to handle high
                 point densities without sacrificing its accuracy. In this context outlier data is not very significant
                 so the standard drawback of noise impacting the methods is not as impactful. While Agglomerative and GMM
@@ -454,6 +529,24 @@
             <div class="image-area">
                 <img src="Images/results.png" alt="Table containing the S-scores of our results">
             </div>
+            <br />
+            <p>
+                The figure above showcases the results of the various algorithms tested in this project, with 
+                green highlighting the highest scores and dark red highlighting the lowest. Highlighted in bright
+                red are also the results of the density-based algorithms which, as mentioned above, displayed misleadingly
+                high S-Scores. 
+
+                It is interesting to note how these scores are not the final verdict when it comes to algorithm accuracy, and it goes to show
+                that it is important to verify the validity of our results.
+            </p>
+
+            <p>
+                To conclude, it is important to note the challenging nature of musical feature space. We are working with a feature space
+                topology that is notoriously difficult to cluster due to the uniform distribution of point density, the effects of high 
+                dimensionality, and the fact that this feature space is a highly continous manifold rather than easily identifiable and clearly
+                distinct clusters or globular structures. Our results highlight these facts and provide evidence for the aforementioned nature of 
+                data like this. 
+            </p>
         </div>
     
     </main>
