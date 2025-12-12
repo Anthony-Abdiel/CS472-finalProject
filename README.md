@@ -36,7 +36,11 @@ These include:
 
 ## Usage Instructions
 
-### 1. Set up the Python environment
+### 1. Download the data to the directory
+Requires ```fma_metadata.zip```. from https://github.com/mdeff/fma
+Download the data set, and extract into the /fmaTesting directory with the default name 
+
+### 2. Set up the Python environment
 Requires **Python 3.11.0**.
 
 ```bash
@@ -46,13 +50,13 @@ source music_env/bin/activate   # Mac/Linux
 pip install -r requirements.txt
 ```
 
-### 2. Run the project
+### 3. Run the project
 
 ```bash
 python main.py
 ```
 
-### 3. Outputs
+### 4. Outputs
 Running the script generates:
 - Silhouette score metrics printed to the terminal  
 - Visualization graphs including:
